@@ -4,13 +4,12 @@ def no_query_on_enter_state(context):
     return "How can I help?"
 
 def no_query_on_input(line, context):
-    # Help, I'm locked out in main
-    match = re.search(r'locked out in (.+)', line, re.IGNORECASE)
-    if match:
-        place = match.group(1)
-        
-        # Return (new state, new context, some output)
-        return ('SEND_HELP', {'location': place}, None)
+    # I'm looking for a high energy pet
+    if 'high energy' in line.lower():     
+        # Return (new state - recommend, new context - energy)
+        return ('RECOMMEND', {'energy': 'high'}, None)
+    elif 'low energy' in line.lower():
+        return ('RECOMMEND', {'energy': 'low'}, None)
     else:
         return ('NO_QUERY', {}, 'Sorry, I did not understand.')
 
