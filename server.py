@@ -15,11 +15,42 @@ def alexa():
     'response': {
         'outputSpeech': {
         'type': 'PlainText',
-        'text': 'Hello, welcome to my bot'
+        'text': 'Hello, welcome to my Pet Bot'
         }
         }
     })
+
+    global state
+    global context
     
+    line = request.values.get('text') or ''
+ 
+    ret = findapet.ON_INPUT[state](line, context) 
+
+    state, context, optional_output = ret
+    if optional_output:
+        return jsonify({
+        'version': '0.1',
+        'response': {
+            'outputSpeech': {
+            'type': 'PlainText',
+            'text': optional_output
+            }
+            }
+        })
+    
+    else:
+        state, context, output = findapet.ON_ENTER_STATE[state](context)
+        return jsonify({
+        'version': '0.1',
+        'response': {
+            'outputSpeech': {
+            'type': 'PlainText',
+            'text': output
+            }
+            }
+        })
+
 # A basic homepage, to check everything is working.
 @app.route('/',  methods=['POST', 'GET'])
 def index():
