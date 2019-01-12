@@ -7,7 +7,19 @@ context = {}
 
 
 app = Flask(__name__)
-
+# for alexa
+@app.route('/alexa', methods=['POST', 'GET'])
+def alexa():
+    return jsonify({
+    'version': '0.1',
+    'response': {
+        'outputSpeech': {
+        'type': 'PlainText',
+        'text': 'Hello, welcome to my bot'
+        }
+        }
+    })
+    
 # A basic homepage, to check everything is working.
 @app.route('/',  methods=['POST', 'GET'])
 def index():
