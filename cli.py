@@ -25,8 +25,12 @@ while True: # this will NEVER stop on it's own.
     ret = findapet.ON_INPUT[state](line, context) 
 
     state, context, optional_output = ret
-    if optional_output:
-        print(optional_output)
     
-    output = findapet.ON_ENTER_STATE[state](context)
-    print(output)
+    if optional_output:
+        #print("hello", state, context)
+        print(optional_output)
+        optional_output = None
+    else:
+        #print("blah", state, context)
+        state, context, output = findapet.ON_ENTER_STATE[state](context)
+        print(output)

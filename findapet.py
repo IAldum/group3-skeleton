@@ -16,6 +16,8 @@ def no_query_on_input(line, context):
     else:
         return ('NO_QUERY', {}, 'Sorry, I did not understand.')
 
+#def wanting_a_pet_but_not_specify(context):
+
 def recommend_on_enter_state(context):
     suggested_animal = ""
     if context['energy'] == 'high':
@@ -26,7 +28,8 @@ def recommend_on_enter_state(context):
             suggested_animal += i + " or "
 
     suggested_animal = suggested_animal[:-4]
-    return f"You wanted a {context['energy']} energy animal. I suggest you get a {suggested_animal} a dog."
+    answer= f"You wanted a {context['energy']} energy animal. I suggest you get a {suggested_animal} a dog."
+    return ('NO_QUERY', {}, answer)
 
 def recommend_on_input(line, context):
     # Go back to the start, regardless.
