@@ -12,21 +12,26 @@ app = Flask(__name__)
 def alexa():
     global state
     global context
-    
-    line = request.values.get('text') or ''
+
+    data = request.get_json()
+    #line = request.values.get('text') or ''
+    query = data['request']['intent']['slots']['query']['value']
  
     ret = findapet.ON_INPUT[state](line, context) 
 
     state, context, optional_output = ret
-    if optional_output:
+    request_type = data['request']['type']
+    if request_type == 'IntentRequest':
+        query = data['request']['intent']['slots']['query']['value']
         return jsonify({
         'version': '0.1',
+
         'response': {
             'outputSpeech': {
             'type': 'PlainText',
-            'shouldEndSession': False,
             'text': optional_output
-            }
+            },
+            'shouldEndSession': False,
             }
         })
     
@@ -37,9 +42,9 @@ def alexa():
         'response': {
             'outputSpeech': {
             'type': 'PlainText',
-            'shouldEndSession': False,
             'text': output
-            }
+            },
+            'shouldEndSession': False,
             }
         })
 
