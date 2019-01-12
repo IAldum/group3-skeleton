@@ -4,9 +4,11 @@ import requests
 app = Flask(__name__)
 
 # A basic homepage, to check everything is working.
-@app.route('/')
+@app.route('/',  methods=['POST', 'GET'])
 def index():
-    return "Welcome to Group 3's project!"
+    message = request.form.get('text')
+    return f"You said {message}"
+
 
 # A basic slack endpoint.
 @app.route('/mycommand', methods=['POST'])
