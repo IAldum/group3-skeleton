@@ -14,14 +14,18 @@ def alexa():
     global context
 
     data = request.get_json()
-    #line = request.values.get('text') or ''
+    # for slack
+    # line = request.values.get('text') or ''
     query = data['request']['intent']['slots']['query']['value']
  
     ret = findapet.ON_INPUT[state](line, context) 
 
-    state, context, optional_output = ret
+    #state, context, optional_output = ret
     request_type = data['request']['type']
     if request_type == 'IntentRequest':
+        state, context = "NO_QUERY", {}
+        ret = findapet.ON_INPUT[state]('', context)
+         
         query = data['request']['intent']['slots']['query']['value']
         return jsonify({
         'version': '0.1',
