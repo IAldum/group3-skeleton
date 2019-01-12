@@ -26,10 +26,11 @@ def index():
         'text': optional_output
     })
     
-    output = findapet.ON_ENTER_STATE[state](context)
-    return jsonify({
-    'reponse_type': 'in_channel',
-    'text': output
+    else:
+        output = findapet.ON_ENTER_STATE[state](context)
+        return jsonify({
+        'reponse_type': 'in_channel',
+        'text': output
     })
     
 
