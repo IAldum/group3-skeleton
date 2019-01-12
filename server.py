@@ -14,7 +14,7 @@ def index():
     global state
     global context
     
-    line = request.values.get('text')
+    line = request.values.get('text') or ''
  
     ret = findapet.ON_INPUT[state](line, context) 
 
