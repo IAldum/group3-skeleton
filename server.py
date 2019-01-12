@@ -10,16 +10,6 @@ app = Flask(__name__)
 # for alexa
 @app.route('/alexa', methods=['POST', 'GET'])
 def alexa():
-    return jsonify({
-    'version': '0.1',
-    'response': {
-        'outputSpeech': {
-        'type': 'PlainText',
-        'text': 'Hello, welcome to my Pet Bot'
-        }
-        }
-    })
-
     global state
     global context
     
@@ -34,6 +24,7 @@ def alexa():
         'response': {
             'outputSpeech': {
             'type': 'PlainText',
+            'shouldEndSession': False,
             'text': optional_output
             }
             }
@@ -46,6 +37,7 @@ def alexa():
         'response': {
             'outputSpeech': {
             'type': 'PlainText',
+            'shouldEndSession': False,
             'text': output
             }
             }
