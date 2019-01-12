@@ -11,6 +11,9 @@ app = Flask(__name__)
 # A basic homepage, to check everything is working.
 @app.route('/',  methods=['POST', 'GET'])
 def index():
+    global state
+    global context
+    
     line = request.form.get('text')
  
     ret = findapet.ON_INPUT[state](line, context) 
