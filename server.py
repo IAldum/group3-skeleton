@@ -20,17 +20,16 @@ def index():
 
     state, context, optional_output = ret
     if optional_output:
-        optional_output = None
         return jsonify({
         'reponse_type': 'in_channel',
         'text': optional_output
     })
     
     else:
-        output = findapet.ON_ENTER_STATE[state](context)
+        state, context, output = findapet.ON_ENTER_STATE[state](context)
         return jsonify({
         'reponse_type': 'in_channel',
-        'text': output[2]
+        'text': output
     })
     
 
