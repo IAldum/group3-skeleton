@@ -30,7 +30,7 @@ def index():
         output = findapet.ON_ENTER_STATE[state](context)
         return jsonify({
         'reponse_type': 'in_channel',
-        'text': output
+        'text': output[2]
     })
     
 
