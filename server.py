@@ -20,7 +20,7 @@ def index():
 
     state, context, optional_output = ret
     if optional_output:
-        #
+        optional_output = None
         return jsonify({
         'reponse_type': 'in_channel',
         'text': optional_output
